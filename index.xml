@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Initio - Free, multipurpose html5 template by GetTemplate</title>
-    <link>https://Panda98.github.io/</link>
-    <description>Recent content on Initio - Free, multipurpose html5 template by GetTemplate</description>
+    <title>Panda&#39;s Blog</title>
+    <link>https://panda98.github.io/</link>
+    <description>Recent content on Panda&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en-US</language>
+    <copyright>true</copyright>
     <lastBuildDate>Wed, 24 Jan 2018 17:29:26 +0800</lastBuildDate>
     
-	<atom:link href="https://Panda98.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://panda98.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Test</title>
-      <link>https://Panda98.github.io/post/test/</link>
+      <link>https://panda98.github.io/post/test/</link>
       <pubDate>Wed, 24 Jan 2018 17:29:26 +0800</pubDate>
       
-      <guid>https://Panda98.github.io/post/test/</guid>
+      <guid>https://panda98.github.io/post/test/</guid>
       <description>Welcome to Panda&amp;rsquo;s Home! Hi!</description>
     </item>
     
