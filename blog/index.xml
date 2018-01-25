@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Panda&#39;s Blog</title>
-    <link>https://panda98.github.io/</link>
-    <description>Recent content on Panda&#39;s Blog</description>
+    <title>Blogs on Panda&#39;s Blog</title>
+    <link>https://panda98.github.io/blog/</link>
+    <description>Recent content in Blogs on Panda&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>true</copyright>
     <lastBuildDate>Thu, 25 Jan 2018 16:07:47 +0800</lastBuildDate>
     
-	<atom:link href="https://panda98.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://panda98.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,15 +19,6 @@
       
       <guid>https://panda98.github.io/blog/test/</guid>
       <description>Hello Welcome to Panda&amp;rsquo;s blog!</description>
-    </item>
-    
-    <item>
-      <title>Test</title>
-      <link>https://panda98.github.io/post/test/</link>
-      <pubDate>Wed, 24 Jan 2018 17:29:26 +0800</pubDate>
-      
-      <guid>https://panda98.github.io/post/test/</guid>
-      <description>Welcome to Panda&amp;rsquo;s Home! Hi!</description>
     </item>
     
   </channel>
