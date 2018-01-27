@@ -21,5 +21,14 @@
       <description>Hello Welcome to Panda&amp;rsquo;s blog!</description>
     </item>
     
+    <item>
+      <title></title>
+      <link>https://panda98.github.io/blog/python%E7%88%AC%E8%99%AB%E5%88%9D%E6%B6%89/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://panda98.github.io/blog/python%E7%88%AC%E8%99%AB%E5%88%9D%E6%B6%89/</guid>
+      <description>基本框架 import urllib2 # 设置header user_agent = &#39;Mozilla&#39; headers = {&#39;User-Agent&#39;: user_agent} url = &#39;www.panda.com&#39; # 使用requests获得网页内容 page = requests.get(url, headers=headers).content # 使用urllib2获得网页内容 # Request(url,data,headers) request = urllib2.Request(url, headers) response = urllib2.urlopen(request) page = response.read() # proxy代理设置 enable_proxy=True proxy_handler = urllib2.ProxyHandler({&#39;http&#39;:&#39;http://some-proxy.com:8080&#39;}) null_proxy_handler=urllib2.ProxyHandler({}) if enable_proxy: opener = urllib2.build_opener(proxy_handler) else: opener = urllib2.build_opener(null_proxy_handler) urllib2.install_opener(opener)  静态页面获取  使用BeautifulSoup库来处理html页面  soup = BeautifulSoup(&#39;&amp;lt;b class=&amp;quot;boldest&amp;quot;&amp;gt;Extremely bold&amp;lt;/b&amp;gt;&#39;) # Tag tag = soup.b # b是指html中的&amp;lt;b&amp;gt;标签 # 通过.</description>
+    </item>
+    
   </channel>
 </rss>

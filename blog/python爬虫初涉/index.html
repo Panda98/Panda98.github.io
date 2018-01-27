@@ -6,11 +6,11 @@
         <title>
             
             
-                Test | Panda&#39;s Blog
+                 | Panda&#39;s Blog
             
         </title>
 
-        <meta name="title" content="Test | Panda&#39;s Blog">
+        <meta name="title" content=" | Panda&#39;s Blog">
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -28,7 +28,7 @@
         <meta name="twitter:site" content="@Pan">
         <meta name="twitter:creator" content="@Pan">
         
-        <meta property="og:title" content="Test | Panda&#39;s Blog">
+        <meta property="og:title" content=" | Panda&#39;s Blog">
         <meta property="og:type" content="website">
         <meta property="og:url" content="https://panda98.github.io">
         <meta property="og:image" content="https://panda98.github.io/images/osprey.png">
@@ -40,7 +40,7 @@
         <meta name="theme-color" content="#FFF">
         
 
-        <link rel="canonical" href="https://panda98.github.io/blog/test/">
+        <link rel="canonical" href="https://panda98.github.io/blog/python%E7%88%AC%E8%99%AB%E5%88%9D%E6%B6%89/">
         
         <link rel="stylesheet" href="https://panda98.github.io/styles/main.css" type="text/css">
         
@@ -90,25 +90,132 @@
 
     <section class="container">
         <section class="content">
-            <h1> Test </h1>
+            <h1>  </h1>
 
             <div class="sub-header">
-                January 2018 · 1 minute read
+                January 0001 · 1 minute read
             </div>
 
             <article class="entry-content">
                 
 
-<h1 id="hello">Hello</h1>
+<h2 id="基本框架">基本框架</h2>
 
-<p>Welcome to Panda&rsquo;s blog!</p>
+<pre><code class="language-python">import urllib2
+# 设置header
+user_agent = 'Mozilla'
+headers = {'User-Agent': user_agent}
+
+url = 'www.panda.com'
+
+# 使用requests获得网页内容
+page = requests.get(url, headers=headers).content
+
+# 使用urllib2获得网页内容
+# Request(url,data,headers)
+request = urllib2.Request(url, headers)
+response = urllib2.urlopen(request)
+page = response.read()
+
+# proxy代理设置
+enable_proxy=True
+proxy_handler = urllib2.ProxyHandler({'http':'http://some-proxy.com:8080'})
+null_proxy_handler=urllib2.ProxyHandler({})
+if enable_proxy:
+    opener = urllib2.build_opener(proxy_handler)
+else:
+    opener = urllib2.build_opener(null_proxy_handler)
+urllib2.install_opener(opener)
+</code></pre>
+
+<h2 id="静态页面获取">静态页面获取</h2>
+
+<ul>
+<li>使用BeautifulSoup库来处理html页面</li>
+</ul>
+
+<pre><code class="language-python">  soup = BeautifulSoup('&lt;b class=&quot;boldest&quot;&gt;Extremely bold&lt;/b&gt;')
+  # Tag
+  tag = soup.b # b是指html中的&lt;b&gt;标签
+  # 通过.name来获取tag的名字
+  tag.name # b
+  # 获取tag的属性
+  tag['class'] # boldest
+  # 获取所有属性
+  tag.attrs # {u'class':u'boldest'}
+</code></pre>
+
+<h2 id="动态页面获取">动态页面获取</h2>
+
+<ul>
+<li>使用浏览器开发者工具获取动态生成页面的url</li>
+<li>通过url获取的是json格式的数据</li>
+</ul>
+
+<h3 id="处理json数据">处理json数据</h3>
+
+<pre><code class="language-python">page = requests.get(url,headers=headers)
+# 获得json数据格式
+content = pages.json()
+# 获得对应的数据
+content['rank'] # 获得json里rank对应的值
+</code></pre>
+
+<h2 id="遇到的python问题">遇到的Python问题</h2>
+
+<p>习惯了使用java，python也是很久之前学了一点，都忘了很多了…本来以为就像从java到C#一样，变通一下就是了，可是真的应用起来，发现python在很多方面的习惯和java还是挺不一样呢。虽然可能是基础，但记录一下遇到的问题，加深印象</p>
+
+<h3 id="类成员访问权限">类成员访问权限</h3>
+
+<ul>
+<li><p>public：直接写变量名或方法名</p></li>
+
+<li><p>private：在变量名前加__</p></li>
+</ul>
+
+<pre><code class="language-python">  page = [] # 这是public
+  __page = [] # 这是private
+</code></pre>
+
+<h3 id="类中方法中调用类成员变量或其他方法">类中方法中调用类成员变量或其他方法</h3>
+
+<ul>
+<li>与java不同，不能直接调用，要使用self指针来调用</li>
+</ul>
+
+<pre><code class="language-python">  def A(self):
+      # ...
+      
+  def B(self):
+      self.A
+</code></pre>
+
+<p>​</p>
+
+<h3 id="for循环">for循环</h3>
+
+<ul>
+<li>与C++，java，C#不同，for循环不是由循环变量初始化、循环条件和更新三部分组成，而是类似于java中的增强for循环的结构</li>
+</ul>
+
+<pre><code class="language-python">  pages = ['a','b','c']
+  for page in pages:
+      print page
+  # 类似于java的普通for循环，i从0到11，注意，每一次执行完循环体，i都会更新
+  # 不管是否在循环体中更新i，i都会接着上一次的i值加一
+  # 所以要是想在循环体中更新，可以使用while循环
+  for i in range(0,11)：
+    #...
+</code></pre>
+
+<p>​</p>
 
             </article>
 
             <div class="pagination">
                 
-                    <a href="https://panda98.github.io/blog/python%E7%88%AC%E8%99%AB%E5%88%9D%E6%B6%89/">&laquo; </a>
                 
+                    <a href="https://panda98.github.io/blog/test/">Test &raquo;</a>
                 
             </div>
         </section>
