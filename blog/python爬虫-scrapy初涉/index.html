@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        
+
+        <title>
+            
+            
+                Python爬虫-Scrapy初涉 | Panda&#39;s Blog
+            
+        </title>
+
+        <meta name="title" content="Python爬虫-Scrapy初涉 | Panda&#39;s Blog">
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="referrer" content="no-referrer-when-downgrade">
+        <meta name="generator" content="">
+        <base href="https://panda98.github.io">
+        <meta name="description" content="Panda&#39;s Blog">
+        
+        <meta name="author" content="Panda Pan">
+        
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@Pan">
+        <meta name="twitter:creator" content="@Pan">
+        
+        <meta property="og:title" content="Python爬虫-Scrapy初涉 | Panda&#39;s Blog">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://panda98.github.io">
+        <meta property="og:image" content="https://panda98.github.io/images/osprey.png">
+        <meta property="og:description" content="Panda&#39;s Blog">
+        
+
+        
+        <link rel="icon" type="image/png" sizes="16x16" href="https://panda98.github.io/images/logo/favicon.ico">
+        <meta name="theme-color" content="#FFF">
+        
+
+        <link rel="canonical" href="https://panda98.github.io/blog/python%E7%88%AC%E8%99%AB-scrapy%E5%88%9D%E6%B6%89/">
+        
+        <link rel="stylesheet" href="https://panda98.github.io/styles/main.css" type="text/css">
+        
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/github.min.css">
+        
+    </head>
+
+    <body>
+        
+
+        
+
+        <nav class="row middle-xs center-xs">
+            <div class="col-xs-6 col-sm-1 logo">
+                <a href="https://panda98.github.io"><img src="https://panda98.github.io/images/osprey-logo.png" alt="Panda&#39;s Blog"></a>
+            </div>
+            
+            <div class="col-xs-3 col-sm-2"><h3><a href="https://panda98.github.io/#about">About</a></h3></div>
+            
+            <div class="col-xs-3 col-sm-2"><h3><a href="https://panda98.github.io/#work">Work</a></h3></div>
+            
+            <div class="col-xs-3 col-sm-2"><h3><a href="https://panda98.github.io/#blog">Blog</a></h3></div>
+            
+            <div class="col-xs-3 col-sm-2"><h3><a href="https://panda98.github.io/#contact">Contact</a></h3></div>
+            
+            <div class="col-xs-6 col-sm-1 nav-toggle">
+                <a href="" class="nav-icon" onclick="return false"><img src="https://panda98.github.io/images/icon-menu.png" alt="Open Menu"><img src="https://panda98.github.io/images/icon-x.png" alt="Close Menu" style="display: none;"></a>
+            </div>
+        </nav>
+        <section class="nav-full row middle-xs center-xs">
+            <div class="col-xs-12">
+                <div class="row middle-xs center-xs">
+                    
+                    <div class="col-xs-12"><h1><a href="https://panda98.github.io/#about">About</a></h1></div>
+                    
+                    <div class="col-xs-12"><h1><a href="https://panda98.github.io/#work">Work</a></h1></div>
+                    
+                    <div class="col-xs-12"><h1><a href="https://panda98.github.io/#blog">Blog</a></h1></div>
+                    
+                    <div class="col-xs-12"><h1><a href="https://panda98.github.io/#contact">Contact</a></h1></div>
+                    
+                </div>
+            </div>
+        </section>
+        <main>
+
+
+    <section class="container">
+        <section class="content">
+            <h1> Python爬虫-Scrapy初涉 </h1>
+
+            <div class="sub-header">
+                January 2018 · 1 minute read
+            </div>
+
+            <article class="entry-content">
+                
+
+<h2 id="简介">简介</h2>
+
+<ul>
+<li>python开发的一个快速、高层次的屏幕抓取和web抓取框架，用于抓取web站点并从页面中提取结构化的数据</li>
+<li>可用于数据挖掘、检测和自动化测试</li>
+<li>运行流程：
+
+<ul>
+<li>引擎从调度器中取出一个url用于接下来的抓取</li>
+<li>引擎把url封装成一个Request传给下载器</li>
+<li>下载器把资源下载下载，并封装成Response</li>
+<li>爬虫解析Response</li>
+<li>解析出实体，则交给实体管道进行进一步的处理</li>
+<li>解析出的是url，把url交给调度器等待抓取</li>
+</ul></li>
+</ul>
+
+<h2 id="快速使用scrapy">快速使用Scrapy</h2>
+
+<h3 id="创建项目">创建项目</h3>
+
+<ul>
+<li>在要存放项目的文件夹下打开cmd，输入</li>
+</ul>
+
+<pre><code>  scrapy startproject project_name
+
+</code></pre>
+
+<ul>
+<li>可以修改settings.py，建议取消下面几行的注释：</li>
+</ul>
+
+<pre><code class="language-python">  # Enable and configure HTTP caching (disabled by default)
+  # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
+  HTTPCACHE_ENABLED = True
+  HTTPCACHE_EXPIRATION_SECS = 0
+  HTTPCACHE_DIR = 'httpcache'
+  HTTPCACHE_IGNORE_HTTP_CODES = []
+  HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+</code></pre>
+
+<ul>
+<li>作用：Scrapy会缓存你有的Requests!当你再次请求时，如果存在缓存文档则返回缓存文档，而不是去网站请求，这样既加快了本地调试速度，也减轻了 网站的压力</li>
+</ul>
+
+<h4 id="在pycharm中使用scrapy项目">在Pycharm中使用Scrapy项目</h4>
+
+<ul>
+<li><p>目前没有找到直接在Pycharm中创建Scrapy项目的途径，所以先自行用命令行创建项目，再在Pycharm中打开</p></li>
+
+<li><p>在project_name下创建文件main.py</p></li>
+</ul>
+
+<pre><code class="language-python">  # main.py
+  from scrapy import cmdline
+  cmdline.execute('scrapy crawl spider_name'.split())
+</code></pre>
+
+<p>（spider_name要与自己创建的spider.py中定义的 spider_name相同，详情见 *制作爬虫-爬*）</p>
+
+<ul>
+<li>配置项目，Script中指定的文件为刚才创建的main.py，就可以在Pycharm中调试和运行Scrapy项目了</li>
+</ul>
+
+<h4 id="item">Item</h4>
+
+<ul>
+<li><p>用来存放抓取内容的容器</p></li>
+
+<li><p>构建item模型：</p>
+
+<ul>
+<li>修改item.py文件，在原本的class后面添加自己的class</li>
+</ul></li>
+</ul>
+
+<pre><code class="language-python">  class Name(Item):
+      title=Filed()
+      link=Field()
+      desc=Field()
+</code></pre>
+
+<h3 id="制作爬虫">制作爬虫</h3>
+
+<h4 id="爬">爬</h4>
+
+<ul>
+<li>创建scrapy.spider.BaseSpider的一个子类，并确定3个强制的属性：
+
+<ul>
+<li>name：爬虫的识别名称，必须是唯一的</li>
+<li>start_url：爬取的url列表。爬虫从这里开始爬取数据，所以，第一次下载的数据回从这些urls开始。其他子url回从这些起始url中继承性生成</li>
+<li>parse()：解析的方法，调用的时候传入从每个url传回的Response对象作为唯一参数，负责解析并匹配抓取的数据（解析为item，跟踪更多的url）</li>
+</ul></li>
+</ul>
+
+<pre><code class="language-python">from scrapy.spider import Spider
+
+class Spider(Spider):
+    name='spider_name'
+    allowed_domains=['movie.douban.com'] # 爬虫的约束区域，规定爬虫只爬取该域名下网页
+    start_urls=[
+        &quot;url&quot;
+    ]
+
+    def parse(self,response):
+        filename='movie'
+        open(filename,'wb').write(response.body)
+</code></pre>
+
+<ul>
+<li><p>还可设置其他的属性</p>
+
+<ul>
+<li>start_requests方法：</li>
+</ul>
+
+<pre><code class="language-python">from scrapy.http import Request
+def start_requests(self):
+    # 可以采用连接字符串的方式来生成多个url
+    yield Request(url,headers=self.headers,callback=self.parse)
+</code></pre>
+
+<ul>
+<li>该方法可以用来设置请求头</li>
+</ul></li>
+</ul>
+
+<h4 id="取">取</h4>
+
+<h5 id="xpath-selectors">XPath selectors</h5>
+
+<ul>
+<li>Scrapy中，可以使用XPath selectors机制，它基于XPath表达式
+
+<ul>
+<li>了解selectors机制：<a href="https://doc.scrapy.org/en/latest/topics/selectors.html#topics-selectors">https://doc.scrapy.org/en/latest/topics/selectors.html#topics-selectors</a></li>
+<li>例子：</li>
+<li>/html/head/title: 选择html文档&lt;head&gt;元素下面的&lt;title&gt;标签</li>
+<li>//td：选择所有&lt;td&gt;元素</li>
+<li>XPath教程：<a href="http://www.w3school.com.cn/xpath/">http://www.w3school.com.cn/xpath/</a></li>
+<li>nodename 选取此结点的所有子结点</li>
+<li>/ 从根节点选取</li>
+<li>// 从匹配选择的当前结点选择文档中的结点，而且不考虑它们位置</li>
+<li>. 选取当前结点</li>
+<li>.. 选取当前结点的子节点</li>
+<li>@ 选取属性</li>
+</ul></li>
+<li>Scrapy提供XPathSelector类使用XPath
+
+<ul>
+<li>HtmlXPathSelector：html数据解析</li>
+<li>XmlXPathSelector：xml数据解析</li>
+<li>必须通过一个Response对象对他们进行实例化操作</li>
+</ul></li>
+<li>Selectors的四种基础方法：
+
+<ul>
+<li>xpath()：返回一系列的selectors，每一个select标识一个xpath参数表达式选择的结点</li>
+<li>css()：返回一系列的selecors，每个select标识一个css参数表达式选择的结点</li>
+<li>extract()：返回一个unicode字符串，为选中的数据</li>
+<li>re()：返回一串一个unicode字符串，为使用正则表达式抓取出来的内容</li>
+</ul></li>
+</ul>
+
+<h5 id="sel对象">sel对象</h5>
+
+<ul>
+<li><p>selector对象sel，可根据返回的数据类型自动选择最佳的解析方案（xml or html）</p></li>
+
+<li><p>如，要抓取&lt;title&gt;标签，可以</p></li>
+</ul>
+
+<pre><code class="language-html">  &lt;title&gt;Open&lt;/title&gt;
+</code></pre>
+
+<pre><code class="language-python">  sel.xpath('//title')
+  # [&lt;Selector xpath='//title' data=u'&lt;title&gt;Open&lt;/title&gt;']
+</code></pre>
+
+<ul>
+<li>```python
+In [1]: sel.xpath(&lsquo;//title&rsquo;)<br />
+Out[1]: [<Selector xpath='//title' data=u'<title>Open</title>]<br />
+<br /></li>
+</ul>
+
+<p>In [2]: sel.xpath(&lsquo;//title&rsquo;).extract()<br />
+  Out[2]: [u&rsquo;<title>Open</title>&rsquo;]</p>
+
+<p>In [3]: sel.xpath(&lsquo;//title/text()&rsquo;)<br />
+  Out[3]: [&lt;Selector xpath=&lsquo;//title/text()&rsquo; data=u&rsquo;Open&rsquo;]</p>
+
+<p>In [4]: sel.xpath(&lsquo;//title/text()&rsquo;).extract()<br />
+  Out[4]: [u&rsquo;Open&rsquo;]</p>
+
+<p>In [5]: sel.xpath(&lsquo;//title/text()&rsquo;).re(&lsquo;(\w+):&lsquo;)<br />
+  Out[5]: [u&rsquo;Open&rsquo;]<br />
+  ```</p>
+
+<h4 id="使用item">使用item</h4>
+
+<ul>
+<li>使用标准字典语法获取item某个属性的值或修改某个属性的值</li>
+</ul>
+
+<h3 id="遇到的bug">遇到的bug</h3>
+
+<ul>
+<li>写完后报错：ImportError：No module named win32api
+
+<ul>
+<li>解决：pip install pywin32</li>
+</ul></li>
+<li>安装完后再运行报错：ImportError: DLL load failed: 找不到指定模块
+
+<ul>
+<li>解决：将python安装目录下\Lib\site-packages\pywin32_system32下的文件：pythoncom27.dll, pywintypes27.dll两个文件复制到（你的python安装目录）\Lib\site-packages\win32下，另一个文件复制到同时复制到（你的python安装目录）\Lib\site-packages\win32以及lib下</li>
+</ul></li>
+<li>调试信息中出现：Forbidden by robots.txt，导致爬取失败：
+
+<ul>
+<li>解决：Scrapy爬虫默认遵循robots.txt，有的网站会设置不允许robot爬取的内容，所以遵循robots.txt的爬虫将不会爬取该部分内容，所以要解决这个问题，可以在settings.py中修改ROBOTSTXT_OBEY 为False，即可</li>
+</ul></li>
+</ul>
+
+            </article>
+
+            <div class="pagination">
+                
+                    <a href="https://panda98.github.io/blog/python%E7%88%AC%E8%99%AB-%E5%88%9D%E6%B6%89/">&laquo; Python爬虫-初涉</a>
+                
+                
+                    <a href="https://panda98.github.io/blog/python%E7%88%AC%E8%99%AB-scrapy%E8%BF%9B%E9%98%B6/">Python爬虫-Scrapy进阶 &raquo;</a>
+                
+            </div>
+        </section>
+        <br>
+        <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost")
+                return;
+            var disqus_shortname = 'Pan';
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view comments powered by <a href="http://disqus.com/?ref_noscript">Disqus</a>.</noscript>
+</section>
+
+    </section>
+
+        </main>
+        <footer class="row middle-xs center-xs">
+            
+            <div class="col-xs-3 col-md-2"><a href="https://github.com/Pan">GitHub</a></div>
+            
+            
+            <div class="col-xs-3 col-md-2"><a href="https://linkedin.com/in/Pan">LinkedIn</a></div>
+            
+            
+            <div class="col-xs-3 col-md-2"><a href="https://twitter.com/Pan">Twitter</a></div>
+            
+            
+            <div class="col-xs-12">
+                
+                Copyright &copy; 2018 Panda&#39;s Blog.
+                
+                
+                Theme developed by <a href="https://tomanistor.com">Toma Nistor</a>.
+                
+            </div>
+            
+            
+            <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+            
+            <script src="https://panda98.github.io/scripts/main.js" type="text/javascript"></script>
+            
+            <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js"></script>
+        </footer>
+    </body>
+</html>
+
